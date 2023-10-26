@@ -43,4 +43,4 @@ else:
 headers = response.headers
 print(headers)
 with open('request.header.txt', 'w') as file:
-    file.write(str(headers)
+    file.write(str(headers))
