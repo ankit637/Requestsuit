@@ -20,10 +20,15 @@ else:
         file.write(response.content)
     print(response.cookies, response.text)  # cookies,html content
 
-    # Re-arranged code for getting response headers and writing them to a file
-    headers_dict = dict(response.headers)
+    # Write response headers to 'response.header.txt'
+    response_headers = dict(response.headers)
+    with open('response_headers.txt', 'w') as file:
+        json.dump(response_headers, file, indent=4)  # Save headers as JSON with indentation
+
+    # Write request headers to 'request.header.txt'
+    request_headers = dict(response.request.headers)
     with open('request.header.txt', 'w') as file:
-        json.dump(headers_dict, file, indent=4)  # Save headers as JSON with indentation
+        json.dump(request_headers, file, indent=4)  # Save headers as JSON with indentation
 
     soup = BeautifulSoup(response.text, 'html.parser')
     links = [a['href'] for a in soup.find_all('a', href=True)]
