@@ -2,6 +2,7 @@ import requests
 from requests.exceptions import HTTPError
 from bs4 import BeautifulSoup
 import re
+import json
 
 url = 'https://www.wscubetech.com/'
 
@@ -17,6 +18,12 @@ else:
 
     with open('file.html', 'wb') as file:
         file.write(response.content)
+    print(response.cookies, response.text)  # cookies,html content
+
+    # Re-arranged code for getting response headers and writing them to a file
+    headers_dict = dict(response.headers)
+    with open('request.header.txt', 'w') as file:
+        json.dump(headers_dict, file, indent=4)  # Save headers as JSON with indentation
 
     soup = BeautifulSoup(response.text, 'html.parser')
     links = [a['href'] for a in soup.find_all('a', href=True)]
@@ -26,6 +33,7 @@ else:
             urls_file.write(link + '\n')
 
     print(response.cookies)
+
 
 headers = response.headers
 print(headers)
