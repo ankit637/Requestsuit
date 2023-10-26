@@ -1,3 +1,14 @@
+# import requests
+#
+# response = requests.get('https://www.instagram.com/mr_bhaukali_mzp63')
+# print("response code",response.status_code)
+#
+# if response.status_code == 200:
+#     print('Success!')
+# elif response.status_code == 404:
+#     print('Not Found.')
+#-----------------------------------------------------------------------------------------------------------------------
+#
 import requests
 from requests.exceptions import HTTPError
 from bs4 import BeautifulSoup
@@ -39,8 +50,3 @@ else:
 
     print(response.cookies)
 
-
-headers = response.headers
-print(headers)
-with open('request.header.txt', 'w') as file:
-    file.write(str(headers))
